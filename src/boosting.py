@@ -53,9 +53,7 @@ class AdaBoost:
     return self
 
   def predict(self, X):
-  
-      stump_preds = np.array([stump.predict(X) for stump in self.stumps])
-      return np.sign(np.dot(self.stump_weights, stump_preds))
+    return np.sign(np.dot(self.stump_weights, np.array([stump.predict(X) for stump in self.stumps])))
 
 X, y = dataset(100,10,2)
 
