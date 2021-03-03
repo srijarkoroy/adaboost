@@ -11,8 +11,7 @@ def truncated_adaboost(clf, t: int):         #Truncate a fitted AdaBoost up to (
   new_clf.stump_weights = clf.stump_weights[:t]
   return new_clf
 
-
-def plot_iter_adaboost(X, y, clf, iters=10):       #Plot weak learner and cumulaive strong learner at each iteration.
+def plot_iter_adaboost(X, y, clf, iters):       #Plot weak learner and cumulaive strong learner at each iteration.
    
   # larger grid
   fig, axes = plt.subplots(figsize=(8, iters*3),
@@ -20,7 +19,6 @@ def plot_iter_adaboost(X, y, clf, iters=10):       #Plot weak learner and cumula
                             ncols=2,
                             sharex=True,
                             dpi=100)
-  
   fig.set_facecolor('white')
 
   _ = fig.suptitle('Decision boundaries after every iteration')
@@ -34,7 +32,7 @@ def plot_iter_adaboost(X, y, clf, iters=10):       #Plot weak learner and cumula
                   annotate=False, ax=ax1)
 
     # Plot strong learner
-    trunc_clf = truncated_adaboost(clf, t=i + 1)
+    trunc_clf = truncated_adaboost(clf, t = i + 1)
     _ = ax2.set_title(f'Strong learner at iteration {i + 1}')
     plot_adaboost(X, y, trunc_clf,
                   sample_weights=clf.sample_weights[i],
@@ -45,5 +43,5 @@ def plot_iter_adaboost(X, y, clf, iters=10):       #Plot weak learner and cumula
   plt.show()
 
 X, y = dataset(100,10,2)
-clf = AdaBoost().fit(X, y, iters=10)
-plot_iter_adaboost(X, y, clf)
+clf = AdaBoost().fit(X, y, iters=50)
+plot_iter_adaboost(X, y, clf, 50)
