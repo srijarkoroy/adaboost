@@ -54,11 +54,3 @@ class AdaBoost:
 
   def predict(self, X):
     return np.sign(np.dot(self.stump_weights, np.array([stump.predict(X) for stump in self.stumps])))
-
-X, y = dataset(100,10,2)
-
-clf = AdaBoost().fit(X, y, iters=10)
-plot_adaboost(X, y, clf)
-
-train_err = (clf.predict(X) != y).mean()
-print(f'Train error: {train_err:.1%}')
