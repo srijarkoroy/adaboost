@@ -70,10 +70,10 @@ typing==3.7.4.3
 
 - Cloning the Repository: 
 
-        git clone https://github.com/srijarkoroy/adaboost--implementation
+        git clone https://github.com/srijarkoroy/adaboost
 - Entering the directory: 
 
-        cd adaboost--implementation
+        cd adaboost
 - Running the file:
 
         python3 test.py
