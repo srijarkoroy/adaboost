@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional                #Importing the required modules
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
@@ -10,7 +10,7 @@ def plot_adaboost(X: np.ndarray,               #Plot ± samples in 2D, optionall
                   annotate: bool = False,
                   ax: Optional[mpl.axes.Axes] = None) -> None:
 
-  assert set(y) == {-1, 1}                 
+  assert set(y) == {-1, 1}                  #Setting the range of y values
 
   if not ax:
     fig, ax = plt.subplots(figsize=(5, 5), dpi=100)
@@ -20,16 +20,16 @@ def plot_adaboost(X: np.ndarray,               #Plot ± samples in 2D, optionall
   x_min, x_max = X[:, 0].min() - pad, X[:, 0].max() + pad
   y_min, y_max = X[:, 1].min() - pad, X[:, 1].max() + pad
 
-  if sample_weights is not None:
+  if sample_weights is not None:                       
     sizes = np.array(sample_weights) * X.shape[0] * 100
   else:
     sizes = np.ones(shape=X.shape[0]) * 100
 
-  X_pos = X[y == 1]
+  X_pos = X[y == 1]                           #Plotting the input variables which corresponds to class '1'
   sizes_pos = sizes[y == 1]
   ax.scatter(*X_pos.T, s=sizes_pos, marker='+', color='green')
 
-  X_neg = X[y == -1]
+  X_neg = X[y == -1]                          #Plotting the input variables which corresponds to class '-1'
   sizes_neg = sizes[y == -1]
   ax.scatter(*X_neg.T, s=sizes_neg, marker='.', c='blue')
 
@@ -41,7 +41,7 @@ def plot_adaboost(X: np.ndarray,               #Plot ± samples in 2D, optionall
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
 
-    if list(np.unique(Z)) == [1]:
+    if list(np.unique(Z)) == [1]:           #Adding colors to the predicted classes
       fill_colors = ['g']
     else:
       fill_colors = ['b', 'g']
