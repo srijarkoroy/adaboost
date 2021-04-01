@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
-from datagenerate import dataset
-from plot import plot_adaboost
-from boosting import AdaBoost
+from src.datagenerate import dataset
+from src.plot import plot_adaboost
+from src.boosting import AdaBoost
 
 X, y = dataset(100,10,2)
 
