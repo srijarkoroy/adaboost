@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt              #importing the required modules
-from datagenerate import dataset
-from plot import plot_adaboost
-from boosting import AdaBoost
+from src.datagenerate import dataset
+from src.plot import plot_adaboost
+from src.boosting import AdaBoost
 
 def truncated_adaboost(clf, t: int):         #Truncate a fitted AdaBoost up to (and including) a particular iteration
   assert t > 0                               #t must be a positive integer

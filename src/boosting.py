@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
-from datagenerate import dataset
-from plot import plot_adaboost
+from src.datagenerate import dataset
+from src.plot import plot_adaboost
 
 class AdaBoost:
 
@@ -10,6 +10,7 @@ class AdaBoost:
     self.stump_weights = None
     self.errors = None
     self.sample_weights = None
+    self.ada_errors = None
 
   def fit(self, X: np.ndarray, y: np.ndarray, iters: int):
 
@@ -20,6 +21,7 @@ class AdaBoost:
     self.stumps = np.zeros(shape=iters, dtype=object)
     self.stump_weights = np.zeros(shape=iters)
     self.errors = np.zeros(shape=iters)
+    self.ada_errors = np.zeros(shape=iters)
 
     # initializing weights uniformly
     self.sample_weights[0] = np.ones(shape=n) / n
@@ -32,7 +34,7 @@ class AdaBoost:
 
       # calculating error and stump weight from weak learner prediction
       stump_pred = stump.predict(X)
-      err = curr_sample_weights[(stump_pred != y)].sum()# / n
+      err = curr_sample_weights[(stump_pred != y)].sum() / n
       stump_weight = np.log((1 - err) / err) / 2
 
       # updating sample weights
@@ -49,6 +51,7 @@ class AdaBoost:
       self.stumps[t] = stump
       self.stump_weights[t] = stump_weight
       self.errors[t] = err
+      self.ada_errors[t] = np.prod(((self.errors[t]*(1-self.errors[t]))**1/2))
 
     return self
 
